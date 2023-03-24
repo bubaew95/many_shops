@@ -1,0 +1,89 @@
+{% extends 'shop/details/main.html.twig' %}
+
+{% block title %}
+    Магазин - {{ shop.name }}
+{% endblock %}
+
+{% block shipingTitle %}
+    <a href="/">
+        <- Вернутся назад
+    </a>
+{% endblock %}
+
+{% block logo %}
+    {{ shop.logo }}
+{% endblock %}
+
+{% block body %}
+
+    {% if widgets.slider is defined %}
+        <!--start slider section-->
+        {% include ('widget/slider.html.twig') with {items: widgets.slider} %}
+        <!--end slider section-->
+    {% endif %}
+
+    {% if widgets.information is defined %}
+        <!--start information-->
+        {% include ('widget/information.html.twig') with {items: widgets.information} %}
+        <!--end information-->
+    {% endif %}
+
+    {% if widgets.pramoution is defined %}
+        <!--start pramoution-->
+        {% include ('widget/pramoution.html.twig') with {items: widgets.pramoution} %}
+        <!--end pramotion-->
+    {% endif %}
+
+    <!--start Featured product-->
+    <section class="py-4">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <h5 class="text-uppercase mb-0">FEATURED PRODUCTS</h5>
+                <a href="javascript:;" class="btn btn-dark btn-ecomm ms-auto rounded-0">More Products<i class='bx bx-chevron-right'></i></a>
+            </div>
+            <hr/>
+            <div class="product-grid">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+                    {% for item in products %}
+                        {% include ('partials/product/_item.html.twig') %}
+                    {% endfor %}
+                </div>
+                <!--end row-->
+            </div>
+        </div>
+    </section>
+    <!--end Featured product-->
+
+    <!--start New Arrivals-->
+    {% include ('index/partials/_new-arrivals.html.twig') %}
+    <!--end New Arrivals-->
+
+    {% if widgets.advertise_banners is defined %}
+        <!--start Advertise banners-->
+        {% include ('widget/advertise_banners.html.twig') with {items: widgets.advertise_banners} %}
+        <!--end Advertise banners-->
+    {% endif %}
+
+    <!--start categories-->
+{#    {% include ('index/partials/_categories.html.twig') %}#}
+    <!--end categories-->
+
+    <!--start News-->
+{#    {% include ('index/partials/_news.html.twig') %}#}
+    <!--end News-->
+
+    {% if widgets.support_info is defined %}
+        <!--start support info-->
+        {% include ('widget/support_info.html.twig') with {items: widgets.support_info} %}
+        <!--end support info-->
+    {% endif %}
+
+    <!--start brands-->
+{#    {% include ('index/partials/_brands.html.twig') %}#}
+    <!--end brands-->
+
+    <!--start bottom products section-->
+{#    {% include ('index/partials/_bottom-products-section.html.twig') %}#}
+    <!--end bottom products section-->
+
+{% endblock %}

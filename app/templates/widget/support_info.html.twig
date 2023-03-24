@@ -1,0 +1,21 @@
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 row-group">
+
+            {% for item in items %}
+                <div class="col">
+                    <div class="text-center">
+                        <div class="font-50">
+                            <i class="{{ item.icon }}"></i>
+                        </div>
+                        <h2 class="fs-5 text-uppercase mb-0">{{ item.title }}</h2>
+                        <p class="text-capitalize">{{ item.getSubTitle() }}</p>
+                        <p>{{ item.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!--end row-->
+    </div>
+</section>

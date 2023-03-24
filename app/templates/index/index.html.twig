@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block body %}
+
+    {% if slider is defined %}
+        <!--start slider section-->
+        {% include ('widget/slider.html.twig') with {items: slider} %}
+        <!--end slider section-->
+    {% endif %}
+
+    <!--start information-->
+    {{ render(controller('App\\Controller\\WidgetController::index', {block: 1})) }}
+    <!--end information-->
+
+    <!--start pramotion-->
+    {{ render(controller('App\\Controller\\WidgetController::index', {block: 2})) }}
+    <!--end pramotion-->
+
+    <!--start Featured product-->
+    <section class="py-4">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <h5 class="text-uppercase mb-0">Послденее добавление</h5>
+                <a href="javascript:;" class="btn btn-dark btn-ecomm ms-auto rounded-0">Посмотреть все<i class='bx bx-chevron-right'></i></a>
+            </div>
+            <hr/>
+            <div class="product-grid">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+                    {% for item in products %}
+                        {% include ('partials/product/_item.html.twig') %}
+                    {% endfor %}
+                </div>
+                <!--end row-->
+            </div>
+        </div>
+    </section>
+    <!--end Featured product-->
+
+    <!--start New Arrivals-->
+{#    {% include ('index/partials/_new-arrivals.html.twig') %}#}
+    <!--end New Arrivals-->
+
+    <!--start Advertise banners-->
+    {{ render(controller('App\\Controller\\WidgetController::index', {block: 3})) }}
+    <!--end Advertise banners-->
+
+    <!--start categories-->
+{#    {% include ('index/partials/_categories.html.twig') %}#}
+    <!--end categories-->
+
+    <!--start support info-->
+    {{ render(controller('App\\Controller\\WidgetController::index', {block: 4})) }}
+    <!--end support info-->
+
+    <!--start News-->
+    {% include ('index/partials/_news.html.twig') %}
+    <!--end News-->
+
+    <!--start brands-->
+    {% include ('index/partials/_brands.html.twig') %}
+    <!--end brands-->
+
+    <!--start bottom products section-->
+{#    {% include ('index/partials/_bottom-products-section.html.twig') %}#}
+    <!--end bottom products section-->
+
+{% endblock %}

@@ -1,0 +1,46 @@
+<section class="slider-section">
+    <div class="first-slider">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+
+            <ol class="carousel-indicators">
+                {% for index, item in items %}
+                    <li data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ index }}" class="{% if index == 0 %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
+
+            <div class="carousel-inner">
+
+                {% for index, item in items %}
+                    <div class="carousel-item {% if index == 0 %}active{% endif %} bg-dark-gery">
+                        <div class="row d-flex align-items-center">
+                            <div class="col d-none d-lg-flex justify-content-center">
+                                <div class="">
+                                    <h3 class="h3 fw-light">{{ item.getSubTitle() }}</h3>
+                                    <h1 class="h1">{{ item.title }}</h1>
+                                    <p class="pb-3">{{ item.description }}</p>
+                                    <div class="">
+                                        <a class="btn btn-dark btn-ecomm" href="javascript:;">
+                                            {{ item.getBtnTitle() }}
+                                            <i class='bx bx-chevron-right'></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <img src="{{ asset(item.image) }}" class="img-fluid" alt="{{ item.title }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleDark" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</section>

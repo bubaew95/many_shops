@@ -1,0 +1,25 @@
+{% for item in news %}
+    {% set url = path('app_news_details', {alias: item.alias}) %}
+    <div class="item">
+        <div class="card rounded-0 product-card border">
+            <div class="news-date">
+                <div class="date-number">24</div>
+                <div class="date-month">FEB</div>
+            </div>
+            <a href="{{ url }}">
+                <img src="{{ item.image }}" class="card-img-top border-bottom" alt="...">
+            </a>
+            <div class="card-body">
+                <div class="news-title">
+                    <a href="{{ url }}">
+                        <h5 class="mb-3 text-capitalize">{{ item.title }}</h5>
+                    </a>
+                </div>
+                <p class="news-content mb-0">
+                    {{ item.description }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+{% endfor %}

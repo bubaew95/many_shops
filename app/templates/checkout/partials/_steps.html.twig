@@ -1,0 +1,75 @@
+{%
+    set steps = [
+        {
+            id: 2,
+            title: "Детали",
+            path: 'app_cart_step_2',
+            icon: 'user-circle'
+        },
+        {
+            id: 3,
+            title: "Доставка",
+            path: 'app_cart_step_3',
+            icon: 'cube'
+        },
+        {
+            id: 4,
+            title: "Оплата",
+            path: 'app_cart_step_4',
+            icon: 'credit-card'
+        },
+        {
+            id: 5,
+            title: "Подтверждение",
+            path: 'app_cart_step_5',
+            icon: 'check-circle'
+        },
+    ]
+%}
+
+<div class="card bg-transparent rounded-0 shadow-none">
+    <div class="card-body">
+        <div class="steps steps-light">
+
+            <a class="step-item active" href="{{ path('app_cart') }}">
+                <div class="step-progress">
+                    <span class="step-count">1</span>
+                </div>
+                <div class="step-label">
+                    <i class="bx bx-cart"></i>
+                    Корзина
+                </div>
+            </a>
+
+            {% for step in steps %}
+                {% set class = '' %}
+                {% set hrefEnabled = false %}
+                {%
+                    if  ((app.request.get('step_id') is null) and (step.id == 1))
+                    or (step.id <= app.request.get('step_id') )
+                %}
+                    {% set hrefEnabled = true  %}
+                    {% set class = class ~ 'active' %}
+                {% endif %}
+
+                {% if step.id == app.request.get('step_id') %}
+                    {% set class = class ~ ' current'%}
+                {% endif %}
+
+                <a class="step-item {{ class }}"
+                    {% if hrefEnabled %}
+                        href="{{ path('app_checkout', {step_id: step.id}) }}"
+                    {% endif %}
+                >
+                    <div class="step-progress">
+                        <span class="step-count">{{ step.id }}</span>
+                    </div>
+                    <div class="step-label">
+                        <i class='bx bx-{{ step.icon }}'></i>
+                        {{ step.title }}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Корзина пуста
+{% endblock %}
+
+{% block body %}
+    <!--start breadcrumb-->
+    {% include ('commons/partials/_breadcrumb.html.twig') %}
+    <!--end breadcrumb-->
+
+    <section class="py-4">
+        <div class="container">
+            <div class="shop-cart">
+                Корзина пуста
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

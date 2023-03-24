@@ -1,0 +1,29 @@
+<section class="py-4">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+
+            {% for item in items %}
+                <div class="col">
+                    <div class="card rounded-0 border shadow-none">
+                        <div class="row g-0 align-items-center">
+                            <div class="col">
+                                <img src="{{ asset(item.image) }}" class="img-fluid" alt="">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase">{{ item.title }}</h5>
+                                    <p class="card-text text-uppercase">{{ item.getSubTitle() }}</p>
+                                    <a href="javascript:;" class="btn btn-dark btn-ecomm">
+                                        {{ item.getBtnTitle() }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!--end row-->
+    </div>
+</section>

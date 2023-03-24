@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Детали товара
+{% endblock %}
+
+{% block body %}
+
+    <!--start breadcrumb-->
+    <section class="py-3 border-bottom border-top d-none d-md-flex bg-light">
+        <div class="container">
+            <div class="page-breadcrumb d-flex align-items-center">
+                <h3 class="breadcrumb-title pe-3">Allen Solly Men's Polo T-Shirt</h3>
+                <div class="ms-auto">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i> Home</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="javascript:;">Shop</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--end breadcrumb-->
+
+    <!--start product detail-->
+    <section class="py-4">
+        <div class="container">
+            <div class="product-detail-card">
+                <div class="product-detail-body">
+                    <div class="row g-0">
+                        <div class="col-12 col-lg-5">
+                            <div class="image-zoom-section">
+
+                                <div class="product-gallery owl-carousel owl-theme border mb-3 p-3" data-slider-id="1">
+                                    <div class="item">
+                                        <img src="{{ asset(product.image) }}" class="img-fluid" alt="">
+                                    </div>
+                                    {% for item in product.productImages %}
+                                        <div class="item">
+                                            <img src="{{ asset(item.image) }}" class="img-fluid" alt="">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="owl-thumbs d-flex justify-content-center" data-slider-id="1">
+                                    <button class="owl-thumb-item">
+                                        <img src="{{ asset(product.image) }}" class="" alt="">
+                                    </button>
+
+                                    {% for item in product.productImages %}
+                                        <button class="owl-thumb-item">
+                                            <img src="{{ asset(item.image) }}" class="" alt="">
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            <div class="product-info-section p-3">
+                                <h3 class="mt-3 mt-lg-0 mb-0">{{ product.name }}</h3>
+                                <div class="product-rating d-flex align-items-center mt-2">
+                                    <div class="rates cursor-pointer font-13">	<i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-light-4"></i>
+                                    </div>
+                                    <div class="ms-1">
+                                        <p class="mb-0">({{ product.ratings }} Ratings)</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mt-3 gap-2">
+                                    {% if product.discount %}
+                                        <span class="discount">{{ product.discount }}%</span>
+                                        <h5 class="mb-0 text-decoration-line-through text-light-3">
+                                            {{ product.price - ((product.discount / 100) * product.price) }}₽
+                                        </h5>
+                                    {% endif %}
+                                    <h4 class="mb-0">{{ product.price }}₽</h4>
+                                </div>
+                                <div class="mt-3">
+                                    <h6>Краткое описание:</h6>
+                                    <p class="mb-0">{{ product.description }}</p>
+                                </div>
+                                <dl class="row mt-3">
+                                    <dt class="col-sm-3">Артикль:</dt>
+                                    <dd class="col-sm-9">#ART{{ product.id }}</dd>
+                                    <dt class="col-sm-3">Delivery</dt>
+                                    <dd class="col-sm-9">Russia, USA, and Europe</dd>
+                                </dl>
+                                <div class="row row-cols-auto align-items-center mt-3">
+
+                                    {% for option in attributes %}
+                                        <div class="col-12">
+                                            <label class="form-label">{{ option.name }}</label>
+                                            {% for _ind, value in option.attributeValues  %}
+                                                <div>
+                                                    <input type="radio" id="id-{{ option.id ~ _ind }}" value="{{ value.value }}" name="filter[{{ option.name }}][{{ option.id }}]" {% if filter[option.name][value.id] is defined %} checked="checked" {% endif %} />
+                                                    <label for="id-{{ option.id ~ _ind }}">{{ value.value }}</label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+
+                                    <div class="col mt-3">
+                                        <label class="form-label">Quantity</label>
+                                        <select class="form-select form-select-sm">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Size</label>
+                                        <select class="form-select form-select-sm">
+                                            <option>S</option>
+                                            <option>M</option>
+                                            <option>L</option>
+                                            <option>XS</option>
+                                            <option>XL</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Colors</label>
+                                        <div class="color-indigators d-flex align-items-center gap-2">
+                                            <div class="color-indigator-item bg-primary"></div>
+                                            <div class="color-indigator-item bg-danger"></div>
+                                            <div class="color-indigator-item bg-success"></div>
+                                            <div class="color-indigator-item bg-warning"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end row-->
+                                <div class="d-flex gap-2 mt-3">
+                                    <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-white btn-ecomm">
+                                        <i class="bx bxs-cart-add"></i>В корзину
+                                    </a>
+                                    <a href="javascript:;" class="btn btn-light btn-ecomm">
+                                        <i class="bx bx-heart"></i>В избранное
+                                    </a>
+                                </div>
+                                <hr/>
+                                <div class="product-sharing">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"> <a href="javascript:;"><i class='bx bxl-facebook'></i></a>
+                                        </li>
+                                        <li class="list-inline-item">	<a href="javascript:;"><i class='bx bxl-linkedin'></i></a>
+                                        </li>
+                                        <li class="list-inline-item">	<a href="javascript:;"><i class='bx bxl-twitter'></i></a>
+                                        </li>
+                                        <li class="list-inline-item">	<a href="javascript:;"><i class='bx bxl-instagram'></i></a>
+                                        </li>
+                                        <li class="list-inline-item">	<a href="javascript:;"><i class='bx bxl-google'></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end row-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--end product detail-->
+
+    <!--start product more info-->
+    {% include ('catalog/details/partials/_more-information.html.twig') %}
+    <!--end product more info-->
+
+    <!--start similar products-->
+    {% include ('catalog/details/partials/_similar-products.html.twig') %}
+    <!--end similar products-->
+
+{% endblock %}
